@@ -1,0 +1,8 @@
+use testdb
+rs.secondaryOk()
+db.testcoll.find().pretty()
+rs.conf()
+show dbs
+use testdb
+show collections
+db.testcoll.findOne()
