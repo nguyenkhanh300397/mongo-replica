@@ -1,4 +1,4 @@
-name: MongoDB Replica CI
+name: MongoDB Replica Set CI
 
 on:
   push:
@@ -7,18 +7,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:20.10.16
-        options: --privileged  # Bật Docker-in-Docker
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Docker Compose
+    - name: Set up Docker & Docker Compose
       run: |
+        sudo apt-get update
+        sudo apt-get install docker.io -y
         sudo curl -L "https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
+        sudo systemctl start docker
 
     - name: Start MongoDB replica
       run: |
@@ -28,17 +28,13 @@ jobs:
 
     - name: Initiate replica set
       run: |
-        docker exec mongo1 mongo --eval "rs.initiate({
-          _id: 'rs0',
-          members: [
-            { _id: 0, host: 'mongo1:27017' },
-            { _id: 1, host: 'mongo2:27017' },
-            { _id: 2, host: 'mongo3:27017' }
-          ]
-        })"
+        docker exec mongo1 mongo /init-replica.js
         sleep 5
 
     - name: Check replica set status
       run: |
         docker exec mongo1 mongo --eval "rs.status()"
+
+    - name: Stop containers
+      run: docker-compose -f docker-compose.yml down
 
