@@ -16,3 +16,24 @@ db.testcoll.find().pretty()
 show dbs
 rs.status()
 show dbs
+onnection refused","replicaSet":"rs0","isMasterReply":"{}"}}
+{"t":{"$date":"2025-06-15T08:46:32.511+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"rs0","host":"192.168.1.4:27019","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to 192.168.1.4:27019 :: caused by :: Connection refused"},"action":{"dropConnections":true,"requestImmediateCheck":true}}}
+{"t":{"$date":"2025-06-15T08:46:32.511+00:00"},"s":"I",  "c":"-",        "id":4333222, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"RSM received failed isMaster","attr":{"host":"192.168.1.4:27018","error":"HostUnreachable: Error connecting to 192.168.1.4:27018 :: caused by :: Connection refused","replicaSet":"rs0","isMasterReply":"{}"}}
+{"t":{"$date":"2025-06-15T08:46:32.511+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"rs0","host":"192.168.1.4:27018","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to 192.168.1.4:27018 :: caused by :: Connection refused"},"action":{"dropConnections":true,"requestImmediateCheck":false,"outcome":{"host":"192.168.1.4:27018","success":false,"errorMessage":"HostUnreachable: Error connecting to 192.168.1.4:27018 :: caused by :: Connection refused"}}}}
+{"t":{"$date":"2025-06-15T08:46:32.511+00:00"},"s":"I",  "c":"-",        "id":4333222, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"RSM received failed isMaster","attr":{"host":"192.168.1.4:27017","error":"HostUnreachable: Error connecting to 192.168.1.4:27017 :: caused by :: Connection refused","replicaSet":"rs0","isMasterReply":"{}"}}
+{"t":{"$date":"2025-06-15T08:46:32.511+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"rs0","host":"192.168.1.4:27017","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to 192.168.1.4:27017 :: caused by :: Connection refused"},"action":{"dropConnections":true,"requestImmediateCheck":false,"outcome":{"host":"192.168.1.4:27017","success":false,"errorMessage":"HostUnreachable: Error connecting to 192.168.1.4:27017 :: caused by :: Connection refused"}}}}
+{"t":{"$date":"2025-06-15T08:46:33.011+00:00"},"s":"I",  "c":"CONNPOOL", "id":22576,   "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Connecting","attr":{"hostAndPort":"192.168.1.4:27018"}}
+{"t":{"$date":"2025-06-15T08:46:33.011+00:00"},"s":"I",  "c":"CONNPOOL", "id":22576,   "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Connecting","attr":{"hostAndPort":"192.168.1.4:27019"}}
+{"t":{"$date":"2025-06-15T08:46:33.011+00:00"},"s":"I",  "c":"CONNPOOL", "id":22576,   "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Connecting","attr":{"hostAndPort":"192.168.1.4:27017"}}
+{"t":{"$date":"2025-06-15T08:46:33.525+00:00"},"s":"I",  "c":"-",        "id":4333222, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"RSM received failed isMaster","attr":{"host":"192.168.1.4:27018","error":"HostUnreachable: Error connecting to 192.168.1.4:27018 :: caused by :: Connection refused","replicaSet":"rs0","isMasterReply":"{}"}}
+{"t":{"$date":"2025-06-15T08:46:33.525+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"rs0","host":"192.168.1.4:27018","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to 192.168.1.4:27018 :: caused by :: Connection refused"},"action":{"dropConnections":true,"requestImmediateCheck":true}}}
+rs.initiate({   _id: "rs0",   members: [     { _id: 0, host: "192.168.1.11:27017" },     { _id: 1, host: "192.168.1.11:27018" },     { _id: 2, host: "192.168.1.11:27019" }   ] })
+q
+rs.status()
+rs.initiate({   _id: "rs0",   members: [     { _id: 0, host: "192.168.1.11:27017" },     { _id: 1, host: "192.168.1.11:27018" },     { _id: 2, host: "192.168.1.11:27019" }   ] })
+cfg = rs.conf()
+cfg.members[0].host = "192.168.1.11:27017"
+cfg.members[1].host = "192.168.1.11:27018"
+cfg.members[2].host = "192.168.1.11:27019"
+rs.reconfig(cfg, {force: true})
+rs.status()

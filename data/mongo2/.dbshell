@@ -6,3 +6,7 @@ show dbs
 use testdb
 show collections
 db.testcoll.findOne()
+rs.status()
+use testdb
+db.testcoll.insert({name:"Hello MongoDB Replica Set"})
+db.testcoll.insert({name:"Hello MongoDB Replica Set234"})
