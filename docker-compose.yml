@@ -4,6 +4,7 @@ services:
   mongo1:
     image: mongo:4.4
     container_name: mongo1
+    hostname: mongo1
     restart: always
     ports:
       - "27017:27017"
@@ -14,6 +15,7 @@ services:
   mongo2:
     image: mongo:4.4
     container_name: mongo2
+    hostname: mongo2
     restart: always
     ports:
       - "27018:27017"
@@ -24,6 +26,7 @@ services:
   mongo3:
     image: mongo:4.4
     container_name: mongo3
+    hostname: mongo3
     restart: always
     ports:
       - "27019:27017"
