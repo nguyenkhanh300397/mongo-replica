@@ -27,7 +27,11 @@ jobs:
       run: |
         docker network create mongo-net
         docker-compose -f docker-compose.yml up -d
-        sleep 10
+
+    - name: Wait for MongoDB to be ready
+      run: |
+        chmod +x ./wait-for-mongo.sh
+        ./wait-for-mongo.sh
 
     - name: Initiate replica set
       run: |
