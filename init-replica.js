@@ -1,3 +1,4 @@
+
 rs.initiate({
   _id: "rs0",
   members: [
@@ -6,4 +7,5 @@ rs.initiate({
     { _id: 2, host: "mongo3:27017" }
   ]
 });
+
 

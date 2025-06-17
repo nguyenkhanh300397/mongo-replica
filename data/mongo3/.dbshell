@@ -1,0 +1,5 @@
+usedb
+use testdb
+rs.secondaryOK()
+rs.secondaryOk()
+db.testcoll.find().pretty()
